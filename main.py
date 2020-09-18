@@ -15,10 +15,10 @@ app = Flask(__name__)
 
 LINE_SECRET = os.getenv('LINE_SECRET', None)
 LINE_ACCESS_TOKEN = os.getenv('LINE_ACCESS_TOKEN', None)
-if channel_secret is None:
+if LINE_SECRET is None:
     print('Specify LINE_SECRET as environment variable.')
     sys.exit(1)
-if channel_access_token is None:
+if LINE_ACCESS_TOKEN is None:
     print('Specify LINE_ACCESS_TOKEN as environment variable.')
     sys.exit(1)
 
