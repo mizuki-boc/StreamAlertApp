@@ -27,6 +27,7 @@ handler = WebhookHandler(LINE_SECRET)
 
 @app.route("/")
 def main():
+    TextSendMessage(text="yaa")
     return "stream alert app!"
 
 @app.route("/callback", methods=["POST"])
