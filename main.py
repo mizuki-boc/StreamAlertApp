@@ -27,7 +27,7 @@ handler = WebhookHandler(LINE_SECRET)
 
 @app.route("/")
 def main():
-    TextSendMessage(text="yaa")
+    line_bot_api.broadcast(TextSendMessage(text='友達全員にBroadcast'))
     return "stream alert app!"
 
 @app.route("/callback", methods=["POST"])
