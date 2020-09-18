@@ -13,13 +13,13 @@ from linebot.models import (
 
 app = Flask(__name__)
 
-LINE_SECRET = os.getenv('LINE_SECRET', None)
-LINE_ACCESS_TOKEN = os.getenv('LINE_ACCESS_TOKEN', None)
+LINE_SECRET = os.getenv("LINE_SECRET", None)
+LINE_ACCESS_TOKEN = os.getenv("LINE_ACCESS_TOKEN", None)
 if LINE_SECRET is None:
-    print('Specify LINE_SECRET as environment variable.')
+    print("Specify LINE_SECRET as environment variable.")
     sys.exit(1)
 if LINE_ACCESS_TOKEN is None:
-    print('Specify LINE_ACCESS_TOKEN as environment variable.')
+    print("Specify LINE_ACCESS_TOKEN as environment variable.")
     sys.exit(1)
 
 line_bot_api = LineBotApi(LINE_ACCESS_TOKEN)
@@ -27,13 +27,13 @@ handler = WebhookHandler(LINE_SECRET)
 
 @app.route("/")
 def main():
-    # line_bot_api.broadcast(TextSendMessage(text='友達全員にBroadcast'))
+    # line_bot_api.broadcast(TextSendMessage(text="友達全員にBroadcast"))
     return "stream alert app!"
 
 @app.route("/callback", methods=["POST"])
 def callback():
     # get X-Line-Signature header value
-    signature = request.headers['X-Line-Signature']
+    signature = request.headers["X-Line-Signature"]
 
     # get request body as text
     body = request.get_data(as_text=True)
@@ -43,7 +43,7 @@ def callback():
         handler.handle(body, signature)
     except InvalidSignatureError:
         abort(400)
-    return 'OK'
+    return "OK"
 
 @handler.add(MessageEvent, message=TextMessage)
 def message_text(event):
