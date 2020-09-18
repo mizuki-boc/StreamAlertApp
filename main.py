@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, abort
 import os
 import sys
 from linebot import (
@@ -13,8 +13,8 @@ from linebot.models import (
 
 app = Flask(__name__)
 
-channel_secret = os.getenv('LINE_SECRET', None)
-channel_access_token = os.getenv('LINE_ACCESS_TOKEN', None)
+LINE_SECRET = os.getenv('LINE_SECRET', None)
+LINE_ACCESS_TOKEN = os.getenv('LINE_ACCESS_TOKEN', None)
 if channel_secret is None:
     print('Specify LINE_SECRET as environment variable.')
     sys.exit(1)
@@ -22,8 +22,8 @@ if channel_access_token is None:
     print('Specify LINE_ACCESS_TOKEN as environment variable.')
     sys.exit(1)
 
-line_bot_api = LineBotApi(channel_access_token)
-handler = WebhookHandler(channel_secret)
+line_bot_api = LineBotApi(LINE_ACCESS_TOKEN)
+handler = WebhookHandler(LINE_SECRET)
 
 @app.route("/")
 def main():
